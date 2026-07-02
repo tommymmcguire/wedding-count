@@ -39,9 +39,9 @@ export function GuestSearch({ onSelect }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <label className="block">
-        <span className="mb-2 block text-sm font-medium text-neutral-700">
+        <span className="mb-2 block text-center text-[0.7rem] uppercase tracking-[0.25em] text-ink/50">
           Type your full name as it appears on your invitation
         </span>
         <input
@@ -54,7 +54,7 @@ export function GuestSearch({ onSelect }: Props) {
           }}
           placeholder="e.g. Jane Smith"
           autoComplete="off"
-          className="w-full rounded-md border border-neutral-300 bg-white px-4 py-3 text-base outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-200"
+          className="w-full rounded-md border border-line bg-card px-4 py-3 text-center text-base text-ink outline-none transition placeholder:text-ink/30 focus:border-ink/40"
           autoFocus
         />
       </label>
@@ -62,18 +62,20 @@ export function GuestSearch({ onSelect }: Props) {
       <button
         type="submit"
         disabled={submitting || name.trim().length === 0}
-        className="w-full rounded-md bg-neutral-900 px-4 py-3 text-base font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-400"
+        className="w-full rounded-md bg-ink px-4 py-3.5 text-xs font-medium uppercase tracking-[0.25em] text-paper transition hover:bg-ink/85 disabled:cursor-not-allowed disabled:bg-ink/25"
       >
         {submitting ? "Checking…" : "Continue"}
       </button>
 
       {notFound && (
-        <p className="text-sm text-neutral-600">
+        <p className="rounded-md border border-line bg-card px-4 py-3 text-center text-sm font-light text-ink/70">
           We couldn't find that name. Please make sure it's spelled exactly as it appears
           on your invitation, or reach out to the couple.
         </p>
       )}
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="text-center text-sm font-light text-terracotta">{error}</p>
+      )}
     </form>
   );
 }

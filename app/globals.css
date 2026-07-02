@@ -9,5 +9,392 @@
 html,
 body {
   background-color: #faf7f2;
-  color: #2b2b2b;
+  color: #211f1c;
+}
+
+/* Elegant serif headings across the app, echoing the save-the-date */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+/* =====================================================
+   SAVE THE DATE — envelope intro
+   Palette: deep Tyrrhenian sea, ivory paper, olive gold,
+            terracotta wax, aged cream. Sorrento at dusk.
+   ===================================================== */
+
+.std-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  color: #ede0c4;
+  font-family: var(--font-display), "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 20%, #2b4a6b 0%, #1a324b 40%, #0f1f31 80%, #08131f 100%),
+    #08131f;
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+
+.std-intro--dismissing {
+  opacity: 0;
+  transform: scale(1.015);
+  pointer-events: none;
+}
+
+/* subtle paper-grain texture across the whole scene */
+.std-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(237, 224, 196, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 65% 75%, rgba(237, 224, 196, 0.02) 1px, transparent 1px),
+    radial-gradient(circle at 35% 65%, rgba(237, 224, 196, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px, 7px 7px;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* soft distant stars */
+.std-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 15%, rgba(237, 224, 196, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 82% 22%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(1.2px 1.2px at 24% 78%, rgba(237, 224, 196, 0.6), transparent 60%),
+    radial-gradient(0.8px 0.8px at 68% 82%, rgba(237, 224, 196, 0.4), transparent 60%),
+    radial-gradient(0.8px 0.8px at 45% 8%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 92% 60%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(0.8px 0.8px at 4% 55%, rgba(237, 224, 196, 0.4), transparent 60%),
+    radial-gradient(1.2px 1.2px at 34% 92%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(0.8px 0.8px at 78% 8%, rgba(237, 224, 196, 0.4), transparent 60%);
+  animation: std-twinkle 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes std-twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+.std-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 100% 70% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* monogram at top */
+.std-monogram {
+  position: absolute;
+  top: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  color: #d9b872;
+  letter-spacing: 0.25em;
+  opacity: 0;
+  animation: std-fade-in 1200ms ease 400ms forwards;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.std-monogram span {
+  font-size: 1.75rem;
+  font-style: italic;
+  font-weight: 500;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-display), "Cormorant Garamond", "Playfair Display", serif;
+}
+.std-monogram__amp {
+  font-size: 1.3rem !important;
+  color: #b8894a;
+  font-style: italic;
+  letter-spacing: 0 !important;
+  transform: translateY(-2px);
+}
+
+@keyframes std-fade-in {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* corner flourishes — hand-drawn feel */
+.std-corner {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  color: #b8894a;
+  opacity: 0;
+  animation: std-fade-in-plain 1500ms ease 800ms forwards;
+  pointer-events: none;
+}
+.std-corner--tl { top: 32px; left: 32px; }
+.std-corner--tr { top: 32px; right: 32px; transform: scaleX(-1); }
+.std-corner svg { width: 100%; height: 100%; }
+
+@keyframes std-fade-in-plain {
+  from { opacity: 0; }
+  to { opacity: 0.6; }
+}
+
+/* -------- envelope scene -------- */
+
+.std-scene {
+  perspective: 1700px;
+  position: relative;
+  z-index: 1;
+}
+
+.std-envelope {
+  position: relative;
+  width: min(82vw, 460px);
+  aspect-ratio: 1.5 / 1;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 34px 48px rgba(0, 0, 0, 0.55));
+  animation: std-envelope-in 1100ms cubic-bezier(0.34, 1.4, 0.64, 1) 300ms both;
+}
+
+@keyframes std-envelope-in {
+  from { opacity: 0; transform: translateY(46px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* paper interior, seen once the flap opens */
+.std-envelope__inside {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(0);
+  border-radius: 3px;
+  background: linear-gradient(180deg, #c8b48c 0%, #d8c6a0 45%, #cdb98f 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(80, 55, 20, 0.28),
+    inset 0 14px 34px rgba(70, 45, 15, 0.30);
+}
+
+/* the save-the-date card, tucked inside */
+.std-card {
+  position: absolute;
+  left: 6.5%;
+  right: 6.5%;
+  top: 7%;
+  bottom: 11%;
+  background: #fbf6ea;
+  border-radius: 2px;
+  padding: 5px;
+  overflow: hidden;
+  transform: translateZ(1px) translateY(7%) scale(0.95);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 1500ms cubic-bezier(0.34, 1.2, 0.5, 1) 350ms,
+    box-shadow 900ms ease;
+}
+.std-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1px;
+}
+
+/* once opened, the card rises out and enlarges to be fully read */
+.std-envelope--revealed .std-card,
+.std-envelope--dismissing .std-card {
+  transform: translateZ(60px) translateY(-6%) scale(1.72);
+  box-shadow:
+    0 44px 74px rgba(0, 0, 0, 0.55),
+    0 14px 26px rgba(0, 0, 0, 0.35);
+}
+.std-envelope--revealed .std-card img,
+.std-envelope--dismissing .std-card img {
+  object-fit: contain;
+  background: #1c3a63;
+}
+
+/* once the card is out, the envelope itself recedes for a clean read */
+.std-envelope--revealed .std-flap,
+.std-envelope--revealed .std-envelope__inside,
+.std-envelope--dismissing .std-flap,
+.std-envelope--dismissing .std-envelope__inside {
+  opacity: 0;
+  transition: opacity 650ms ease 250ms;
+}
+
+/* the four flaps that tile the envelope face */
+.std-flap {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+}
+
+.std-flap--left {
+  clip-path: polygon(0 0, 0 100%, 50% 50%);
+  background: linear-gradient(90deg, #d9c9a5 0%, #c7b489 100%);
+  transform: translateZ(2px);
+}
+.std-flap--right {
+  clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+  background: linear-gradient(270deg, #d9c9a5 0%, #c7b489 100%);
+  transform: translateZ(2px);
+}
+.std-flap--bottom {
+  clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+  background: linear-gradient(0deg, #e6d8b6 0%, #d5c096 100%);
+  transform: translateZ(3px);
+  filter: drop-shadow(0 -2px 4px rgba(70, 45, 15, 0.20));
+}
+
+/* sealed top flap — hinges open on tap */
+.std-flap--top {
+  clip-path: polygon(0 0, 100% 0, 50% 56%);
+  background: linear-gradient(180deg, #f2ead4 0%, #e0d0a8 100%);
+  transform-origin: top center;
+  transform: translateZ(4px) rotateX(0deg);
+  transition: transform 1200ms cubic-bezier(0.65, 0, 0.35, 1);
+  filter: drop-shadow(0 7px 9px rgba(60, 40, 10, 0.28));
+}
+.std-flap--top::after {
+  /* soft crease highlight down the fold */
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 56%);
+  background: linear-gradient(180deg, rgba(255, 250, 235, 0.35) 0%, transparent 40%);
+  mix-blend-mode: overlay;
+}
+
+.std-envelope--opening .std-flap--top,
+.std-envelope--revealed .std-flap--top,
+.std-envelope--dismissing .std-flap--top {
+  transform: translateZ(4px) rotateX(-172deg);
+}
+
+/* wax seal — terracotta, over the flap tip */
+.std-wax {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 74px;
+  height: 74px;
+  transform: translate(-50%, -50%) translateZ(5px);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, #d05a3c 0%, #a83a26 40%, #7a1e10 75%, #4d1008 100%);
+  box-shadow:
+    inset -3px -6px 12px rgba(0, 0, 0, 0.45),
+    inset 3px 4px 8px rgba(255, 200, 170, 0.35),
+    0 6px 14px rgba(0, 0, 0, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(237, 224, 196, 0.85);
+  font-family: var(--font-display), "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6);
+  transition: opacity 500ms ease, transform 700ms ease;
+}
+.std-wax::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  left: 22%;
+  width: 40%;
+  height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 220, 200, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.std-envelope--opening .std-wax,
+.std-envelope--revealed .std-wax,
+.std-envelope--dismissing .std-wax {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateZ(5px) scale(0.5) rotate(18deg);
+}
+
+/* hint text */
+.std-hint {
+  position: absolute;
+  bottom: 11vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d9b872;
+  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.28em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.std-hint::before,
+.std-hint::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: #b8894a;
+  vertical-align: middle;
+  margin: 0 1rem;
+  opacity: 0.6;
+}
+
+.std-hint--shown {
+  opacity: 1;
+  animation: std-hint-pulse 2.6s ease-in-out infinite;
+}
+.std-hint--hidden {
+  opacity: 0;
+}
+
+@keyframes std-hint-pulse {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+.std-hint--stage-revealed {
+  animation: std-hint-appear 900ms ease 1300ms both,
+             std-hint-pulse 2.6s ease-in-out 2.2s infinite;
+}
+@keyframes std-hint-appear {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (max-width: 480px) {
+  .std-monogram { top: 5vh; }
+  .std-monogram span { font-size: 1.4rem; }
+  .std-corner { width: 70px; height: 70px; top: 20px !important; }
+  .std-corner--tl { left: 20px; }
+  .std-corner--tr { right: 20px; }
+  .std-hint { bottom: 7vh; font-size: 0.95rem; letter-spacing: 0.2em; }
+  .std-hint::before, .std-hint::after { width: 18px; margin: 0 0.6rem; }
+  .std-wax { width: 62px; height: 62px; font-size: 1.3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .std-intro *,
+  .std-intro::before,
+  .std-intro::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
