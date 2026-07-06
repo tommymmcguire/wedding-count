@@ -12,13 +12,13 @@ export const wedding = {
   venue: "Bellevue Syrene",
   city: "Sorrento, Italy",
   time: "4:00 PM 'til late",
-  // External links — swap these for the real URLs.
+  // External links. Set airbnb/vrbo to a URL to show those buttons on /stay.
   links: {
-    registry: "#registry-link",
-    hostHotel: "https://www.bellevue.it/",
-    otherHotels: "#other-hotels",
-    airbnb: "#airbnb-wishlist",
-    vrbo: "#vrbo-wishlist",
+    registry: "https://www.zola.com/registry/jacquelynandtommy",
+    hostHotel: "https://www.bellevue.it/en/",
+    otherHotels: "https://mcguire-wedding-accomodations.netlify.app/",
+    airbnb: "",
+    vrbo: "",
   },
 } as const;
 

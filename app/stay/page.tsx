@@ -44,24 +44,30 @@ export default function StayPage() {
             </a>
           </section>
 
-          {/* Rentals */}
-          <section className="text-center">
-            <h2 className="font-title text-4xl text-wedding-gold">{stay.rentals.heading}</h2>
-            <p className="mx-auto mt-3 max-w-2xl font-serif text-lg leading-relaxed text-wedding-cream/85">
-              {stay.rentals.body}
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              <a href={wedding.links.airbnb} target="_blank" rel="noopener noreferrer" className={btn}>
-                {stay.rentals.airbnbCta}
-              </a>
-              <a href={wedding.links.vrbo} target="_blank" rel="noopener noreferrer" className={btn}>
-                {stay.rentals.vrboCta}
-              </a>
-            </div>
-            <p className="mt-4 font-serif text-base italic text-wedding-cream/60">
-              {stay.rentals.note}
-            </p>
-          </section>
+          {/* Rentals — shown once the Airbnb/VRBO wishlist links are set */}
+          {(wedding.links.airbnb || wedding.links.vrbo) && (
+            <section className="text-center">
+              <h2 className="font-title text-4xl text-wedding-gold">{stay.rentals.heading}</h2>
+              <p className="mx-auto mt-3 max-w-2xl font-serif text-lg leading-relaxed text-wedding-cream/85">
+                {stay.rentals.body}
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                {wedding.links.airbnb && (
+                  <a href={wedding.links.airbnb} target="_blank" rel="noopener noreferrer" className={btn}>
+                    {stay.rentals.airbnbCta}
+                  </a>
+                )}
+                {wedding.links.vrbo && (
+                  <a href={wedding.links.vrbo} target="_blank" rel="noopener noreferrer" className={btn}>
+                    {stay.rentals.vrboCta}
+                  </a>
+                )}
+              </div>
+              <p className="mt-4 font-serif text-base italic text-wedding-cream/60">
+                {stay.rentals.note}
+              </p>
+            </section>
+          )}
         </div>
       </div>
     </SiteChrome>
