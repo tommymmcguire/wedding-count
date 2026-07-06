@@ -12,3 +12,7 @@ next-env.d.ts
 # Canva mirror + raw un-optimized assets (local dev only)
 /canva-capture
 /public/canva
+
+# Unused local font files (app uses next/font/google); keep raw fonts out of git
+/public/fonts
+tsconfig.tsbuildinfo
