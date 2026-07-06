@@ -3,20 +3,26 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-}
-
-html,
-body {
-  background-color: #faf7f2;
-  color: #211f1c;
+  color-scheme: dark;
 }
 
 /* Elegant serif headings across the app, echoing the save-the-date */
 h1,
 h2,
 h3 {
-  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+  font-family: var(--font-serif), "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+/* The RSVP flow keeps the original light "Paperless Post" treatment. */
+.rsvp-surface {
+  color-scheme: light;
+  background-color: #faf7f2;
+  color: #211f1c;
+}
+.rsvp-surface h1,
+.rsvp-surface h2,
+.rsvp-surface h3 {
+  font-family: var(--font-serif), "Cormorant Garamond", ui-serif, Georgia, serif;
 }
 
 /* =====================================================
@@ -35,7 +41,7 @@ h3 {
   overflow: hidden;
   cursor: pointer;
   color: #ede0c4;
-  font-family: var(--font-display), "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  font-family: var(--font-serif), "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
   background:
     radial-gradient(ellipse 80% 50% at 50% 20%, #2b4a6b 0%, #1a324b 40%, #0f1f31 80%, #08131f 100%),
     #08131f;
@@ -114,7 +120,7 @@ h3 {
   font-style: italic;
   font-weight: 500;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
-  font-family: var(--font-display), "Cormorant Garamond", "Playfair Display", serif;
+  font-family: var(--font-serif), "Cormorant Garamond", "Playfair Display", serif;
 }
 .std-monogram__amp {
   font-size: 1.3rem !important;
@@ -300,7 +306,7 @@ h3 {
   align-items: center;
   justify-content: center;
   color: rgba(237, 224, 196, 0.85);
-  font-family: var(--font-display), "Cormorant Garamond", serif;
+  font-family: var(--font-serif), "Cormorant Garamond", serif;
   font-style: italic;
   font-size: 1.5rem;
   font-weight: 600;
@@ -334,7 +340,7 @@ h3 {
   left: 50%;
   transform: translateX(-50%);
   color: #d9b872;
-  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+  font-family: var(--font-serif), "Cormorant Garamond", ui-serif, Georgia, serif;
   font-style: italic;
   font-size: 1.15rem;
   letter-spacing: 0.28em;

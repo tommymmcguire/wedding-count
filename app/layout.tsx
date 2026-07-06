@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Cormorant_Garamond, Jost, Alex_Brush, Yellowtail } from "next/font/google";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+const serif = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-display",
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -17,18 +17,36 @@ const body = Jost({
   display: "swap",
 });
 
+// Formal calligraphy for the couple's names.
+const script = Alex_Brush({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-script",
+  display: "swap",
+});
+
+// Bouncy display script for section titles ("Save the Date", "Our Love Story").
+const title = Yellowtail({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-title",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Tentative Plans",
-  description: "Share your tentative plans for the wedding",
+  title: "Jacquelyn & Tommy · Sorrento 2027",
+  description:
+    "Join us as we say I do — Jacquelyn and Tommy's wedding in Sorrento, Italy, June 2027.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body className="min-h-screen bg-paper font-body font-light text-ink antialiased">
-        <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 py-10 sm:py-16">
-          {children}
-        </div>
+    <html
+      lang="en"
+      className={`${serif.variable} ${body.variable} ${script.variable} ${title.variable}`}
+    >
+      <body className="min-h-screen bg-wedding-ink font-serif text-wedding-cream antialiased">
+        {children}
       </body>
     </html>
   );
