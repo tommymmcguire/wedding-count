@@ -1,56 +1,83 @@
 import type { Metadata } from "next";
 import { SiteChrome } from "@/components/site/SiteChrome";
-import { PageBanner } from "@/components/site/PageBanner";
+import { HeroBanner } from "@/components/site/HeroBanner";
 import { events } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Events · Jacquelyn & Tommy" };
 
+// Alternating section palettes, echoing the Canva original (blue → coral → olive).
+const dayThemes = [
+  { bg: "bg-wedding-blue", accent: "text-wedding-gold", oval: "border-wedding-gold/70", body: "text-wedding-cream/90" },
+  { bg: "bg-wedding-coral", accent: "text-wedding-gold", oval: "border-wedding-gold/80", body: "text-wedding-cream" },
+  { bg: "bg-wedding-olive", accent: "text-wedding-gold", oval: "border-wedding-gold/60", body: "text-wedding-cream/90" },
+];
+
+function PhotoRow({ photos }: { photos?: readonly string[] }) {
+  if (!photos || photos.length === 0) return null;
+  return (
+    <div className={`mx-auto mt-6 grid max-w-2xl gap-3 sm:gap-4 ${photos.length > 1 ? "grid-cols-2" : "max-w-xs grid-cols-1"}`}>
+      {photos.map((src) => (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          key={src}
+          src={src}
+          alt=""
+          className="aspect-[4/3] w-full rounded-sm border-4 border-wedding-cream/90 object-cover shadow-xl"
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function EventsPage() {
   return (
     <SiteChrome>
-      <div className="bg-wedding-olive">
-        <PageBanner
-          kicker={events.intro.kicker}
-          title={events.intro.title}
-          subtitle={events.intro.subtitle}
-        />
+      <HeroBanner
+        image={events.heroImage}
+        kicker={events.intro.kicker}
+        title={events.intro.title}
+        subtitle={events.intro.subtitle}
+      />
 
-        <div className="mx-auto max-w-3xl space-y-16 px-6 pb-24">
-          {events.days.map((day) => (
-            <section key={day.date}>
-              <div className="mb-6 text-center">
-                <p className="font-serif text-sm uppercase tracking-[0.3em] text-wedding-cream/60">
-                  {day.day} · {day.date}
-                </p>
-                <h2 className="mt-1 font-script text-5xl text-wedding-gold sm:text-6xl">
-                  {day.title}
-                </h2>
-                {day.note && (
-                  <p className="mt-2 font-serif text-lg italic text-wedding-cream/75">
-                    {day.note}
-                  </p>
-                )}
-              </div>
+      {events.days.map((day, i) => {
+        const theme = dayThemes[i % dayThemes.length];
+        return (
+          <section key={day.date} className={`${theme.bg} px-6 py-16 sm:py-20`}>
+            <div className="mx-auto max-w-3xl text-center">
+              {/* Gold oval date badge */}
+              <span
+                className={`inline-block rounded-[50%] border-2 ${theme.oval} px-8 py-3 font-serif text-lg tracking-wide ${theme.accent}`}
+              >
+                <strong className="font-bold">{day.day}</strong>{" "}
+                <span className="font-normal">{day.date}</span>
+              </span>
+
+              <h2 className={`mt-6 font-script text-6xl ${theme.accent} sm:text-7xl`}>
+                {day.title}
+              </h2>
+              {day.note && (
+                <p className={`mt-3 font-serif text-2xl italic ${theme.body}`}>{day.note}</p>
+              )}
 
               {day.items.length > 0 && (
-                <ol className="relative space-y-8 border-l border-wedding-gold/25 pl-6">
+                <div className="mt-12 space-y-14">
                   {day.items.map((item) => (
-                    <li key={item.time} className="relative">
-                      <span className="absolute -left-[1.9rem] top-1.5 h-3 w-3 rounded-full bg-wedding-gold" />
-                      <p className="font-serif text-xl font-semibold text-wedding-gold">
-                        {item.time} — {item.name}
-                      </p>
-                      <p className="mt-1 font-serif text-lg leading-relaxed text-wedding-cream/85">
+                    <div key={item.time}>
+                      <h3 className={`font-serif text-2xl font-semibold uppercase tracking-wide ${theme.accent} sm:text-3xl`}>
+                        {item.time} <span className="text-wedding-cream/70">·</span> {item.name}
+                      </h3>
+                      <p className={`mx-auto mt-3 max-w-2xl font-serif text-lg leading-relaxed ${theme.body}`}>
                         {item.desc}
                       </p>
-                    </li>
+                      <PhotoRow photos={item.photos} />
+                    </div>
                   ))}
-                </ol>
+                </div>
               )}
-            </section>
-          ))}
-        </div>
-      </div>
+            </div>
+          </section>
+        );
+      })}
     </SiteChrome>
   );
 }

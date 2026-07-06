@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { home } from "@/lib/content";
 
 const tilts = ["-rotate-6", "rotate-3", "-rotate-2", "rotate-6"];
@@ -13,11 +12,10 @@ export function LoveStory() {
             key={src}
             className={`${tilts[i % tilts.length]} bg-wedding-cream p-2 shadow-2xl transition-transform hover:rotate-0`}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={src}
               alt="Jacquelyn and Tommy in Japan"
-              width={220}
-              height={280}
               className="h-40 w-32 object-cover sm:h-52 sm:w-40"
             />
           </div>

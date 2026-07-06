@@ -89,6 +89,7 @@ export const home = {
    ============================================================ */
 
 export const events = {
+  heroImage: asset("5035ce311d7589e7f0ecfa7941b53908.jpg"), // Sorrento coast banner
   intro: {
     kicker: "Wedding Weekend",
     title: "at a glance",
@@ -111,21 +112,25 @@ export const events = {
           time: "5:30 PM",
           name: "Wedding Ceremony",
           desc: "Tommy and Jacquelyn will be saying “I Do” on the famous pier overlooking the Amalfi Coast.",
+          photos: [asset("b81207fa625d3a8efe5281fb0faf1769.jpg"), asset("ae423cce0a85009a4f4ddab27e2461b1.jpg")],
         },
         {
           time: "6:30 PM",
           name: "Cocktail Hour",
           desc: "After the ceremony, please proceed to the indoor hospitality suite for drinks and light bites. Feel free to use this time to explore the terrace, take photos, and catch up with friends and family before the evening celebration continues.",
+          photos: [asset("13ca3dd95fe65c62e21c907d877c288f.jpg"), asset("a04f88336702f2c19c301940f56da524.jpg")],
         },
         {
           time: "8:00 PM",
           name: "Dinner and Dancing",
           desc: "Dinner and dancing will be hosted at the Michelin-awarded restaurant, La Pergola. Expect authentic Italian cuisine, live music, and plenty of dancing throughout the evening, with a live saxophonist, bongos, and more.",
+          photos: [asset("67826313f0524f49781a4ac93ff951a3.jpg"), asset("fa29d3c9a56259cd669df149b971483a.jpg")],
         },
         {
           time: "11:30 PM",
           name: "CAVE RAVE!!",
           desc: "Just when you think the night is over, the real party begins. Join us in the hidden cave beneath the venue for a late-night cave rave with great music, a special musical guest, flowing drinks, and an unforgettable celebration with our favorite people.",
+          photos: [asset("15bc3574fadd0f2154368c9d9860347b.jpg")],
         },
       ],
     },
@@ -141,6 +146,8 @@ export const events = {
 
 export const travel = {
   title: "Travel",
+  heroImage: asset("858e4f48de8d5936c9e5b2595c7a66fa.jpg"), // Capri / Faraglioni
+  stripeBg: asset("78ead2ca6550595dd7d4cbadbf96cfbb.jpg"), // blue/green cabana stripe
   intro: {
     heading: "Travel to Sorrento",
     body: "We are so excited to celebrate with you in Sorrento, Italy, on June 4, 2027. All wedding events will take place at Bellevue Syrene, a beautiful cliffside hotel overlooking the Bay of Naples. We encourage guests to arrive a few days early and enjoy everything Sorrento, Capri, Naples, and the Amalfi Coast have to offer.",
@@ -197,15 +204,18 @@ export const travel = {
 
 export const stay = {
   title: "Hotels and Rentals",
+  heroImage: asset("2ac2a81b815b3ea40c6792e763e6a235.jpg"), // Bellevue Syrene
   hostHotel: {
     label: "Host Hotel",
     name: "Bellevue Syrene",
     location: "Sorrento, Italy · Amalfi Coast",
+    photo: asset("39368e7580dd7eafdaf45cd7699e19de.jpg"), // Hôtel de la Syrène / palms
   },
   otherHotels: {
     heading: "Other Recommended Hotels",
     body: "We have partnered with Dahlia Travel Co. to provide a curated selection of properties at a variety of price points, all conveniently located near the wedding venue.",
     cta: "Find Other Recommended Hotels",
+    photos: [asset("951e6df73d145523115c72b5247061b7.jpg"), asset("9fcb0c79c4f39fdd0ee2a577c17c77ca.jpg")],
   },
   rentals: {
     heading: "Rentals",
@@ -218,12 +228,14 @@ export const stay = {
 
 export const dressCode = {
   title: "What to Wear",
+  heroImage: asset("75692a0c7e2ee192ebd9c5abe3f37f04.jpg"), // Amalfi glamour moodboard
   intro:
     "Inspired by the colorful glamour of the Amalfi Coast, we invite guests to wear playful prints, sun-soaked hues, breezy fabrics, and statement accessories. Think Missoni, Pucci, raffia, crochet, linen, and effortless Mediterranean elegance.",
   events: [
     {
       event: "Welcome Party",
       code: "Dolce Vita",
+      moodboards: [asset("92e65a509f244dbea902dcc97871338c.jpg"), asset("cf0ac04dd460006d34f84083f8e1cd64.jpg")],
       girls:
         "Think effortless Mediterranean style with linen, knit polos, tailored shorts, and relaxed tailoring. Your swimsuit should be part of the look — we'll be in and out of the water all afternoon.",
       boys:
@@ -232,6 +244,7 @@ export const dressCode = {
     {
       event: "Wedding Day",
       code: "Creative Black Tie",
+      moodboards: [asset("0fd055771626ef273f2554c7e24f49ca.jpg"), asset("402e8b35f58c5edc00fb60c584e725d5.jpg")],
       girls:
         "Creative Black Tie is your invitation to embrace bold color, luxurious fabrics, dramatic silhouettes, couture-inspired details, and unforgettable accessories. The more fashion-forward, the better.",
       boys:
@@ -241,6 +254,8 @@ export const dressCode = {
   note:
     "We invite guests to wear their most glamorous, over-the-top outfits. There is no need to hold back — go all out with dramatic silhouettes, sequins, feathers, and statement accessories.",
 };
+
+export const faqHeroImage = asset("858e4f48de8d5936c9e5b2595c7a66fa.jpg"); // Capri
 
 export const faq = [
   {
@@ -283,6 +298,7 @@ export const faq = [
 
 export const registry = {
   title: "Registry",
+  heroImage: asset("2f1ff169c226909368b3558eb71757e8.jpg"), // couple / Sorrento
   body: "Your presence in Sorrento is the greatest gift of all. For those who have asked, we've put together a registry to help us begin our next chapter.",
   cta: "View Our Registry",
 };

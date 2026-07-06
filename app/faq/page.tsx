@@ -1,32 +1,27 @@
 import type { Metadata } from "next";
 import { SiteChrome } from "@/components/site/SiteChrome";
-import { PageBanner } from "@/components/site/PageBanner";
-import { faq } from "@/lib/content";
+import { HeroBanner } from "@/components/site/HeroBanner";
+import { faq, faqHeroImage } from "@/lib/content";
 
 export const metadata: Metadata = { title: "FAQ · Jacquelyn & Tommy" };
 
 export default function FaqPage() {
   return (
     <SiteChrome>
-      <div className="bg-wedding-hero">
-        <PageBanner title="F.A.Q." subtitle="Frequently Asked Questions" />
+      <HeroBanner image={faqHeroImage} title="F.A.Q." subtitle="Frequently Asked Questions" />
 
-        <div className="mx-auto max-w-3xl px-6 pb-24">
-          <div className="divide-y divide-wedding-gold/15 border-y border-wedding-gold/15">
-            {faq.map((item) => (
-              <details key={item.q} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-xl text-wedding-gold marker:hidden">
-                  {item.q}
-                  <span className="shrink-0 text-wedding-gold/60 transition-transform duration-200 group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 font-serif text-lg leading-relaxed text-wedding-cream/85">
-                  {item.a}
-                </p>
-              </details>
-            ))}
-          </div>
+      <div className="bg-[#8fb7c2]">
+        <div className="mx-auto max-w-3xl space-y-5 px-6 py-20">
+          {faq.map((item) => (
+            <div key={item.q} className="rounded-xl bg-wedding-olive p-7 shadow-lg">
+              <h2 className="font-serif text-xl font-semibold text-wedding-gold sm:text-2xl">
+                {item.q}
+              </h2>
+              <p className="mt-3 font-serif text-lg leading-relaxed text-wedding-cream/90">
+                {item.a}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </SiteChrome>

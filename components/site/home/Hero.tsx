@@ -1,17 +1,14 @@
-import Image from "next/image";
 import { home, wedding } from "@/lib/content";
 
 export function Hero() {
   return (
     <section className="relative flex min-h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-wedding-hero">
       {/* Torii-gate hero photo */}
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={home.heroImage}
         alt="Jacquelyn and Tommy beneath a torii gate in Kyoto"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
       {/* Legibility overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/10 to-black/55" />
@@ -19,19 +16,17 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 flex w-full max-w-5xl flex-col items-center px-6 text-center">
         {/* Engaged stamp */}
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={home.stampEngaged}
           alt="Engaged"
-          width={140}
-          height={200}
           className="absolute -left-2 top-8 w-16 rotate-[-8deg] drop-shadow-lg sm:left-4 sm:w-24 md:w-28"
         />
         {/* Married stamp */}
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={home.stampMarried}
           alt="Married"
-          width={200}
-          height={150}
           className="absolute -right-2 bottom-4 w-20 rotate-[6deg] drop-shadow-lg sm:right-4 sm:w-28 md:w-32"
         />
 

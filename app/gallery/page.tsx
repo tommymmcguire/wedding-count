@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { SiteChrome } from "@/components/site/SiteChrome";
 import { gallery } from "@/lib/content";
 
@@ -22,11 +21,10 @@ export default function GalleryPage() {
         <div className="mx-auto max-w-6xl gap-3 px-4 [column-fill:_balance] sm:columns-2 sm:gap-4 md:columns-3 lg:columns-4">
           {gallery.photos.map((src, i) => (
             <div key={src} className="mb-3 break-inside-avoid sm:mb-4">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={src}
                 alt={`Jacquelyn and Tommy memory ${i + 1}`}
-                width={600}
-                height={800}
                 loading={i < 8 ? "eager" : "lazy"}
                 className="w-full rounded-sm object-cover shadow-md"
               />

@@ -1,76 +1,135 @@
 import type { Metadata } from "next";
 import { SiteChrome } from "@/components/site/SiteChrome";
-import { PageBanner } from "@/components/site/PageBanner";
-import { travel } from "@/lib/content";
+import { ScallopCard } from "@/components/site/ScallopCard";
+import { Countdown } from "@/components/site/Countdown";
+import { travel, wedding } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Travel · Jacquelyn & Tommy" };
 
-function Card({
-  heading,
-  children,
-}: {
-  heading: string;
-  children: React.ReactNode;
-}) {
+// Palette sampled from the original Canva Travel page.
+const C = {
+  cream: "#ece0c2",
+  coral: "#cd5a52",
+  maroon: "#6e1a1f",
+  gold: "#f2e08a",
+  blue: "#274a8c",
+  green: "#2f6d4f",
+  darkGreen: "#20443a",
+};
+
+function Heading({ children, color }: { children: React.ReactNode; color: string }) {
   return (
-    <div className="rounded-lg border border-wedding-gold/15 bg-black/15 p-6">
-      <h3 className="font-serif text-2xl text-wedding-gold">{heading}</h3>
-      <div className="mt-3 font-serif text-lg leading-relaxed text-wedding-cream/85">
-        {children}
-      </div>
-    </div>
+    <h2 className="font-serif text-3xl sm:text-4xl" style={{ color }}>
+      {children}
+    </h2>
+  );
+}
+
+function Sub({ children, color }: { children: React.ReactNode; color: string }) {
+  return (
+    <h3 className="font-serif text-xl font-bold" style={{ color }}>
+      {children}
+    </h3>
   );
 }
 
 export default function TravelPage() {
+  const [gettingAround, weather, accommodations, tips] = travel.tips;
+  const [flying, suggested] = travel.sections;
+
   return (
     <SiteChrome>
-      <div className="bg-wedding-hero">
-        <PageBanner title={travel.title} />
+      {/* Full-bleed Capri hero */}
+      <section className="relative flex h-[88vh] min-h-[460px] items-center justify-center overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={travel.heroImage}
+          alt="Capri, Amalfi Coast"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="relative z-10 flex flex-col items-center">
+          <span className="font-script text-8xl text-wedding-gold drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-9xl">
+            Travel
+          </span>
+          <span className="mt-6 animate-bounce text-4xl text-wedding-gold">▾</span>
+        </div>
+      </section>
 
-        <div className="mx-auto max-w-4xl space-y-10 px-6 pb-24">
-          <p className="mx-auto max-w-2xl text-center font-serif text-xl leading-relaxed text-wedding-cream/90">
-            <span className="mb-2 block font-title text-3xl text-wedding-gold">
-              {travel.intro.heading}
-            </span>
-            {travel.intro.body}
-          </p>
+      {/* Striped cabana section with scalloped cards */}
+      <div
+        className="px-4 py-16 sm:px-6 sm:py-24"
+        style={{
+          backgroundImage: `url(${travel.stripeBg})`,
+          backgroundSize: "auto 100%",
+          backgroundRepeat: "repeat-x",
+          backgroundPosition: "top center",
+        }}
+      >
+        <div className="mx-auto flex max-w-3xl flex-col gap-16">
+          {/* Card 1 — cream / coral border */}
+          <ScallopCard border={C.coral} fill={C.cream}>
+            <div className="space-y-4" style={{ color: C.darkGreen }}>
+              <Heading color={C.darkGreen}>Travel to Sorrento</Heading>
+              <p className="font-serif text-lg leading-relaxed">
+                We are so excited to celebrate with you in {wedding.city}, on {wedding.date.display}.
+              </p>
+              <p className="font-serif text-lg leading-relaxed">{travel.intro.body}</p>
+              <div className="pt-4">
+                <Heading color={C.darkGreen}>{gettingAround.heading}</Heading>
+              </div>
+              <p className="font-serif text-lg leading-relaxed">{gettingAround.body}</p>
+            </div>
+          </ScallopCard>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            {travel.sections.map((s) => (
-              <Card key={s.heading} heading={s.heading}>
-                {s.body}
-              </Card>
-            ))}
-          </div>
+          {/* Card 2 — maroon / gold border */}
+          <ScallopCard border={C.gold} fill={C.maroon}>
+            <div className="space-y-4 text-wedding-cream">
+              <Heading color={C.gold}>{suggested.heading}</Heading>
+              <p className="font-serif text-lg leading-relaxed">{suggested.body}</p>
+              <div className="pt-4">
+                <Heading color={C.gold}>{flying.heading}</Heading>
+              </div>
+              <p className="font-serif text-lg leading-relaxed">{flying.body}</p>
+            </div>
+          </ScallopCard>
 
-          <div>
-            <h2 className="mb-5 text-center font-title text-4xl text-wedding-gold">
-              {travel.transfers.heading}
-            </h2>
-            <div className="grid gap-5 md:grid-cols-3">
+          {/* Card 3 — coral / blue border */}
+          <ScallopCard border={C.blue} fill={C.coral}>
+            <div className="space-y-5 text-wedding-cream">
+              <Heading color="#ffffff">{travel.transfers.heading}</Heading>
               {travel.transfers.options.map((o) => (
-                <Card key={o.name} heading={o.name}>
-                  <p>{o.body}</p>
-                  <ul className="mt-3 space-y-1 text-base text-wedding-gold/80">
+                <div key={o.name} className="space-y-2">
+                  <Sub color="#ffffff">{o.name}</Sub>
+                  <p className="font-serif text-lg leading-relaxed">{o.body}</p>
+                  <ul className="list-disc space-y-1 pl-6 font-serif text-lg">
                     {o.meta.map((m) => (
                       <li key={m}>{m}</li>
                     ))}
                   </ul>
-                </Card>
+                </div>
               ))}
             </div>
-          </div>
+          </ScallopCard>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            {travel.tips.map((t) => (
-              <Card key={t.heading} heading={t.heading}>
-                {t.body}
-              </Card>
-            ))}
-          </div>
+          {/* Card 4 — pale yellow / maroon border */}
+          <ScallopCard border={C.maroon} fill={C.gold}>
+            <div className="space-y-4" style={{ color: "#4a1518" }}>
+              <Heading color="#4a1518">{weather.heading}</Heading>
+              <p className="font-serif text-lg leading-relaxed">{weather.body}</p>
+              <div className="pt-4">
+                <Heading color="#4a1518">{accommodations.heading}</Heading>
+              </div>
+              <p className="font-serif text-lg leading-relaxed">{accommodations.body}</p>
+              <div className="pt-4">
+                <Heading color="#4a1518">{tips.heading}</Heading>
+              </div>
+              <p className="font-serif text-lg leading-relaxed">{tips.body}</p>
+            </div>
+          </ScallopCard>
         </div>
       </div>
+
+      <Countdown target={wedding.date.iso} />
     </SiteChrome>
   );
 }

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { home, wedding } from "@/lib/content";
 
 /**
@@ -26,12 +25,11 @@ export function SaveTheDate() {
         {/* Placeholder asset row — to be composed into the real collage */}
         <div className="flex items-end justify-center gap-3 opacity-95">
           {[c.passport, c.lemons, c.envelope, c.tomatoes, c.pasta].map((src) => (
-            <Image
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
               key={src}
               src={src}
               alt=""
-              width={80}
-              height={80}
               className="h-14 w-auto object-contain drop-shadow-lg"
             />
           ))}
