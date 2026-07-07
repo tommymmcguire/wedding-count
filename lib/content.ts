@@ -39,9 +39,9 @@ export const asset = (hash: string) => `/media/${hash}`;
 
 export const home = {
   heroImage: asset("590ebe11828ebd0cd82371bd1b0e5a36.jpg"), // torii gate + couple
-  // TODO: the original "Engaged" Osaka/Japan stamp is drawn as vector art in the
-  // Canva hero and has no standalone file — using the passport as a stand-in for now.
-  stampEngaged: asset("a53da8b60346352c158630b890c286cc.png"), // passport (stand-in)
+  // "Engaged" = Osaka Castle stamp (大阪城). The live site serves this as a 14.8MB
+  // animated GIF; we use a single downscaled frame for performance.
+  stampEngaged: asset("osaka-stamp-engaged.png"), // Osaka Castle stamp
   stampMarried: asset("6c07c8e043635bd0d71b443ae966ffef.png"), // Italia / Sorrento
   collage: {
     passport: asset("a53da8b60346352c158630b890c286cc.png"),
@@ -150,7 +150,7 @@ export const travel = {
   stripeBg: asset("78ead2ca6550595dd7d4cbadbf96cfbb.jpg"), // blue/green cabana stripe
   intro: {
     heading: "Travel to Sorrento",
-    body: "We are so excited to celebrate with you in Sorrento, Italy, on June 4, 2027. All wedding events will take place at Bellevue Syrene, a beautiful cliffside hotel overlooking the Bay of Naples. We encourage guests to arrive a few days early and enjoy everything Sorrento, Capri, Naples, and the Amalfi Coast have to offer.",
+    body: "All wedding events will take place at Bellevue Syrene, a beautiful cliffside hotel overlooking the Bay of Naples. We encourage guests to arrive a few days early and enjoy everything Sorrento, Capri, Naples, and the Amalfi Coast have to offer.",
   },
   sections: [
     {
@@ -255,7 +255,7 @@ export const dressCode = {
     "We invite guests to wear their most glamorous, over-the-top outfits. There is no need to hold back — go all out with dramatic silhouettes, sequins, feathers, and statement accessories.",
 };
 
-export const faqHeroImage = asset("858e4f48de8d5936c9e5b2595c7a66fa.jpg"); // Capri
+export const faqHeroImage = asset("dac58e5d242683c55f8823e1860ec838.jpg"); // couple, neon Japan street
 
 export const faq = [
   {

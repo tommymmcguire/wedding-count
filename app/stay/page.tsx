@@ -11,32 +11,58 @@ const btn =
 export default function StayPage() {
   return (
     <SiteChrome>
-      <HeroBanner image={stay.heroImage} title={stay.title} subtitle="Where to lay your head" />
+      <HeroBanner
+        image={stay.heroImage}
+        titleFontClass="font-script"
+        title={
+          <>
+            Hotels{" "}
+            <span className="mx-1 inline-block translate-y-[-0.15em] rounded-[50%] border border-wedding-gold/70 px-[0.5em] py-[0.1em] align-middle font-serif text-[0.32em] not-italic">
+              and
+            </span>{" "}
+            Rentals
+          </>
+        }
+      />
 
       <div className="bg-wedding-blue">
         <div className="mx-auto max-w-4xl space-y-16 px-6 py-20">
           {/* Host hotel */}
-          <section className="overflow-hidden rounded-lg border border-wedding-gold/25 bg-black/15 shadow-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={stay.hostHotel.photo}
-              alt={stay.hostHotel.name}
-              className="h-72 w-full object-cover sm:h-96"
-            />
-            <div className="p-8 text-center">
-              <p className="font-serif text-sm uppercase tracking-[0.3em] text-wedding-cream/70">
-                {stay.hostHotel.label}
-              </p>
-              <h2 className="mt-1 font-script text-5xl text-wedding-gold sm:text-6xl">
-                {stay.hostHotel.name}
-              </h2>
-              <p className="mt-2 font-serif text-lg text-wedding-cream/85">
-                {stay.hostHotel.location}
-              </p>
-              <a href={wedding.links.hostHotel} target="_blank" rel="noopener noreferrer" className={`${btn} mt-6`}>
-                Hotel Website
-              </a>
+          <section className="text-center">
+            <h2 className="font-script text-5xl text-wedding-gold sm:text-6xl">
+              {stay.hostHotel.name}
+            </h2>
+            <div className="mt-2 flex items-center justify-center gap-3">
+              <span className="text-xl tracking-[0.15em] text-wedding-gold" aria-label="Five stars">
+                ★★★★★
+              </span>
+              <span className="h-px w-6 bg-wedding-cream/40" />
+              <span className="text-left font-serif text-sm leading-tight text-wedding-cream/85">
+                {stay.hostHotel.location.split(" · ").map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </span>
             </div>
+
+            {/* Framed photo with a Host Hotel seal */}
+            <div className="relative mx-auto mt-8 max-w-3xl rounded-sm bg-wedding-cream/90 p-3 shadow-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={stay.hostHotel.photo}
+                alt={stay.hostHotel.name}
+                className="aspect-[16/10] w-full object-cover"
+              />
+              <span className="absolute right-5 top-5 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-wedding-gold text-center font-serif text-sm font-bold leading-tight text-wedding-blue shadow-lg ring-2 ring-wedding-blue/25 ring-offset-2 ring-offset-wedding-gold">
+                <span>Host</span>
+                <span>Hotel</span>
+              </span>
+            </div>
+
+            <a href={wedding.links.hostHotel} target="_blank" rel="noopener noreferrer" className={`${btn} mt-8`}>
+              Hotel Website
+            </a>
           </section>
 
           {/* Other recommended hotels */}

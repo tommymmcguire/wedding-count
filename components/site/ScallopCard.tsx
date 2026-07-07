@@ -18,7 +18,7 @@ export function ScallopCard({
   className?: string;
   children: React.ReactNode;
 }) {
-  const R = 16; // scallop bump radius
+  const R = 26; // scallop bump radius — larger, wavier bumps to match the live cabana edge
   const scallopMask = `
     radial-gradient(${R}px at 50% 100%, #000 98%, #0000) 50% 0 / ${2 * R}px ${R}px repeat-x,
     radial-gradient(${R}px at 50% 0,    #000 98%, #0000) 50% 100% / ${2 * R}px ${R}px repeat-x,

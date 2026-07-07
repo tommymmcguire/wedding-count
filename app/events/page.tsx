@@ -34,9 +34,11 @@ export default function EventsPage() {
     <SiteChrome>
       <HeroBanner
         image={events.heroImage}
-        kicker={events.intro.kicker}
-        title={events.intro.title}
+        title={events.intro.kicker}
+        accent={events.intro.title}
         subtitle={events.intro.subtitle}
+        height="h-[62vh] min-h-[380px]"
+        objectPosition="50% 72%"
       />
 
       {events.days.map((day, i) => {

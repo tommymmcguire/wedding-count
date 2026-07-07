@@ -8,7 +8,17 @@ export const metadata: Metadata = { title: "Dress Code · Jacquelyn & Tommy" };
 export default function DressCodePage() {
   return (
     <SiteChrome>
-      <HeroBanner image={dressCode.heroImage} title={dressCode.title} subtitle="Amalfi glamour" />
+      <HeroBanner
+        image={dressCode.heroImage}
+        titleFontClass="font-script"
+        title={
+          <>
+            What to <span className="font-serif font-bold not-italic">Wear</span>
+          </>
+        }
+        subtitle={dressCode.note}
+        height="h-[60vh] min-h-[380px]"
+      />
 
       <div className="bg-wedding-blue">
         <div className="mx-auto max-w-4xl space-y-16 px-6 py-20">
@@ -18,11 +28,11 @@ export default function DressCodePage() {
 
           {dressCode.events.map((e) => (
             <section key={e.event} className="text-center">
-              <p className="font-serif text-sm uppercase tracking-[0.3em] text-wedding-cream/70">
+              <h2 className="font-script text-5xl text-wedding-gold sm:text-6xl">
                 {e.event}
-              </p>
-              <h2 className="mt-1 font-script text-5xl text-wedding-gold sm:text-6xl">
-                {e.code}
+                <span className="font-serif text-4xl font-bold not-italic sm:text-5xl">
+                  : {e.code}
+                </span>
               </h2>
 
               {/* Moodboards */}
@@ -54,10 +64,6 @@ export default function DressCodePage() {
               </div>
             </section>
           ))}
-
-          <p className="mx-auto max-w-2xl text-center font-serif text-lg italic leading-relaxed text-wedding-cream/80">
-            {dressCode.note}
-          </p>
         </div>
       </div>
     </SiteChrome>
