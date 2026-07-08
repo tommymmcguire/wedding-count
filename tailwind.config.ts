@@ -32,6 +32,18 @@ export default {
           gold: "#f2e392", // pale yellow script / accents
           sand: "#d8c9a6",
         },
+        // "Our Journey Around the Globe" palette — the new (/preview) build.
+        // Extracted from the globe experience; ivory/blush/gold on deep navy.
+        journey: {
+          navy: "#0b1026", // night-sky backdrop
+          navyDeep: "#070a1c", // deepest base
+          ink: "#0d1436", // lifted globe navy / panels
+          blush: "#e7a6a0", // trail colour A
+          gold: "#f2e392", // trail colour B (shared with wedding.gold)
+          goldWarm: "#f6c56b", // merged / finale gold
+          ivory: "#f7efe2", // primary text
+          petal: "#f7c6d0", // cherry-blossom accent
+        },
         // Legacy RSVP (Paperless-Post-style) palette — kept for /rsvp
         paper: "#faf7f2",
         card: "#ffffff",

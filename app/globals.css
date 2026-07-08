@@ -26,6 +26,74 @@ h3 {
 }
 
 /* =====================================================
+   "OUR JOURNEY" SITE — new /preview build
+   Scoped design-system utilities (page transitions,
+   scroll reveals, nav underline). Palette lives in Tailwind
+   under `journey.*`.
+   ===================================================== */
+
+.journey-theme {
+  background-color: #070a1c;
+  color: #f7efe2;
+}
+/* Headings in the new build use Tailwind font utilities (font-script /
+   font-title). Those single-class utilities already outrank the global
+   `h1,h2,h3` element rule, so no per-heading override is needed here. */
+
+/* route crossfade — applied by app/preview/template.tsx on each navigation */
+@keyframes journey-page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.journey-page-enter {
+  animation: journey-page-in 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* scroll-reveal system — <Reveal> toggles .is-in via IntersectionObserver */
+.jr-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--jr-delay, 0ms);
+  will-change: opacity, transform;
+}
+.jr-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* animated nav underline */
+.jr-navlink {
+  position: relative;
+}
+.jr-navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.jr-navlink:hover::after,
+.jr-navlink[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-page-enter,
+  .jr-reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* =====================================================
    SAVE THE DATE — envelope intro
    Palette: deep Tyrrhenian sea, ivory paper, olive gold,
             terracotta wax, aged cream. Sorrento at dusk.
