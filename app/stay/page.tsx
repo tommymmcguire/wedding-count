@@ -13,7 +13,7 @@ export default function StayPage() {
     <SiteChrome>
       <HeroBanner
         image={stay.heroImage}
-        titleFontClass="font-script"
+        titleFontClass="font-title"
         title={
           <>
             Hotels{" "}
@@ -29,7 +29,7 @@ export default function StayPage() {
         <div className="mx-auto max-w-4xl space-y-16 px-6 py-20">
           {/* Host hotel */}
           <section className="text-center">
-            <h2 className="font-script text-5xl text-wedding-gold sm:text-6xl">
+            <h2 className="font-title text-5xl text-wedding-gold sm:text-6xl">
               {stay.hostHotel.name}
             </h2>
             <div className="mt-2 flex items-center justify-center gap-3">

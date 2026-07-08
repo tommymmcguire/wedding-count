@@ -54,7 +54,7 @@ export default function EventsPage() {
                 <span className="font-normal">{day.date}</span>
               </span>
 
-              <h2 className={`mt-6 font-script text-6xl ${theme.accent} sm:text-7xl`}>
+              <h2 className={`mt-6 font-title text-6xl ${theme.accent} sm:text-7xl`}>
                 {day.title}
               </h2>
               {day.note && (

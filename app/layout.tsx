@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost, Alex_Brush, Yellowtail } from "next/font/google";
+import { Cormorant_Garamond, Jost, Alex_Brush, Luxurious_Script } from "next/font/google";
 import "./globals.css";
 
 const serif = Cormorant_Garamond({
@@ -25,8 +25,8 @@ const script = Alex_Brush({
   display: "swap",
 });
 
-// Bouncy display script for section titles ("Save the Date", "Our Love Story").
-const title = Yellowtail({
+// Ornate display script for section/page titles ("Save the Date", "F.A.Q.", "Travel").
+const title = Luxurious_Script({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-title",

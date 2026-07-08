@@ -48,7 +48,7 @@ export default function TravelPage() {
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="relative z-10 flex flex-col items-center">
-          <span className="font-script text-8xl text-wedding-gold drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-9xl">
+          <span className="font-title text-8xl text-wedding-gold drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-9xl">
             Travel
           </span>
           <span className="mt-6 animate-bounce text-4xl text-wedding-gold">▾</span>

@@ -12,7 +12,7 @@ export default function GalleryPage() {
     <SiteChrome>
       <HeroBanner
         image={gallery.photos[0]}
-        titleFontClass="font-script"
+        titleFontClass="font-title"
         objectPosition="50% 72%"
         title={
           <>

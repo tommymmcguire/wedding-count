@@ -10,7 +10,7 @@ export default function DressCodePage() {
     <SiteChrome>
       <HeroBanner
         image={dressCode.heroImage}
-        titleFontClass="font-script"
+        titleFontClass="font-title"
         title={
           <>
             What to <span className="font-serif font-bold not-italic">Wear</span>
@@ -28,7 +28,7 @@ export default function DressCodePage() {
 
           {dressCode.events.map((e) => (
             <section key={e.event} className="text-center">
-              <h2 className="font-script text-5xl text-wedding-gold sm:text-6xl">
+              <h2 className="font-title text-5xl text-wedding-gold sm:text-6xl">
                 {e.event}
                 <span className="font-serif text-4xl font-bold not-italic sm:text-5xl">
                   : {e.code}
