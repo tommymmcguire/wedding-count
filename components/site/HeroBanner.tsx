@@ -8,7 +8,7 @@ export function HeroBanner({
   kicker,
   accent,
   subtitle,
-  height = "h-[52vh] min-h-[340px]",
+  height = "min-h-[calc(100svh-3rem)]",
   objectPosition = "center",
   titleFontClass = "font-title",
 }: {
@@ -38,25 +38,29 @@ export function HeroBanner({
 
       <div className="relative z-10 px-6 text-center">
         {kicker && (
-          <p className="font-serif text-sm uppercase tracking-[0.35em] text-wedding-cream/80 drop-shadow sm:text-base">
+          <p className="mb-4 font-serif text-xs uppercase tracking-[0.5em] text-wedding-cream/80 drop-shadow sm:text-sm">
             {kicker}
           </p>
         )}
-        <h1 className={`${titleFontClass} text-6xl leading-tight text-wedding-gold drop-shadow-[0_2px_14px_rgba(0,0,0,0.7)] sm:text-7xl md:text-8xl`}>
+        <h1 className={`${titleFontClass} text-7xl leading-[0.95] text-wedding-gold drop-shadow-[0_2px_14px_rgba(0,0,0,0.7)] sm:text-8xl md:text-[10rem]`}>
           {title}
         </h1>
         {accent && (
-          <p className="-mt-1 font-serif text-4xl font-bold text-wedding-gold/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] sm:text-5xl md:text-6xl">
+          <p className="-mt-2 font-serif text-5xl font-bold text-wedding-gold/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] sm:text-6xl md:text-7xl">
             {accent}
           </p>
         )}
         {subtitle && (
-          <p className="mx-auto mt-3 max-w-xl font-serif text-lg italic leading-relaxed text-wedding-cream drop-shadow-md sm:text-xl">
+          <p className="mx-auto mt-5 max-w-2xl font-serif text-xl italic leading-relaxed text-wedding-cream drop-shadow-md sm:text-2xl">
             {subtitle}
           </p>
         )}
-        <span className="mt-4 block animate-bounce text-2xl text-wedding-gold/80 drop-shadow">▼</span>
       </div>
+
+      {/* Scroll cue anchored to the bottom edge of the hero */}
+      <span className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-2xl text-wedding-gold/80 drop-shadow">
+        ▼
+      </span>
     </section>
   );
 }

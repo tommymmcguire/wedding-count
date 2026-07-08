@@ -37,7 +37,6 @@ export default function EventsPage() {
         title={events.intro.kicker}
         accent={events.intro.title}
         subtitle={events.intro.subtitle}
-        height="h-[62vh] min-h-[380px]"
         objectPosition="50% 72%"
       />
 

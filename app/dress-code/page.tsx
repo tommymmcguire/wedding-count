@@ -17,7 +17,6 @@ export default function DressCodePage() {
           </>
         }
         subtitle={dressCode.note}
-        height="h-[60vh] min-h-[380px]"
       />
 
       <div className="bg-wedding-blue">

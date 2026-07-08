@@ -2,7 +2,7 @@ import { home, wedding } from "@/lib/content";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[calc(100vh-3rem)] items-center justify-center overflow-hidden bg-wedding-hero">
+    <section className="relative flex min-h-[calc(100svh-3rem)] items-center justify-center overflow-hidden bg-wedding-hero">
       {/* Torii-gate hero photo */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -69,21 +69,29 @@ export function Hero() {
           />
         </div>
 
-        <h1 className="relative font-script text-7xl leading-[0.9] text-wedding-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] sm:text-8xl md:text-9xl">
+        <p className="relative mb-4 font-serif text-xs uppercase tracking-[0.5em] text-wedding-gold/85 drop-shadow-md sm:text-sm">
+          {wedding.date.display}
+        </p>
+
+        <h1 className="relative font-script text-8xl leading-[0.85] text-wedding-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] sm:text-9xl md:text-[11rem]">
           {wedding.names.one}
         </h1>
         <span className="relative my-2 inline-block rounded-[50%] border border-wedding-gold/70 px-6 py-0.5 font-serif text-2xl italic text-wedding-gold/90 drop-shadow-md sm:text-3xl">
           and
         </span>
-        <h1 className="relative font-script text-7xl leading-[0.9] text-wedding-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] sm:text-8xl md:text-9xl">
+        <h1 className="relative font-script text-8xl leading-[0.85] text-wedding-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] sm:text-9xl md:text-[11rem]">
           {wedding.names.two}
         </h1>
 
         <p className="relative mt-10 font-sans text-lg font-medium tracking-wide text-wedding-gold drop-shadow-md sm:text-xl">
           {wedding.tagline}
         </p>
-        <span className="relative mt-4 animate-bounce text-wedding-gold/80">▼</span>
       </div>
+
+      {/* Scroll cue anchored to the bottom edge of the hero */}
+      <span className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-2xl text-wedding-gold/80 drop-shadow">
+        ▼
+      </span>
     </section>
   );
 }

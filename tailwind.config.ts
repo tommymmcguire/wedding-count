@@ -14,10 +14,9 @@ export default {
         // Clean sans for UI / body labels
         body: ["var(--font-body)", "Jost", "ui-sans-serif", "system-ui", "sans-serif"],
         sans: ["var(--font-body)", "Jost", "ui-sans-serif", "system-ui", "sans-serif"],
-        // Formal calligraphy for the couple's names ("Jacquelyn & Tommy")
-        script: ["var(--font-script)", "Alex Brush", "cursive"],
-        // Bouncy display script for section titles ("Save the Date", "Our Love Story")
-        title: ["var(--font-title)", "Yellowtail", "cursive"],
+        // The real Canva roundhand script — names + all section/page titles
+        script: ["var(--font-script)", "cursive"],
+        title: ["var(--font-title)", "cursive"],
       },
       colors: {
         // Wedding site palette, sampled from the published Canva design

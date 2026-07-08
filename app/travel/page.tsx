@@ -40,19 +40,26 @@ export default function TravelPage() {
   return (
     <SiteChrome>
       {/* Full-bleed Capri hero */}
-      <section className="relative flex h-[88vh] min-h-[460px] items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[calc(100svh-3rem)] items-center justify-center overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={travel.heroImage}
           alt="Capri, Amalfi Coast"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="relative z-10 flex flex-col items-center">
-          <span className="font-title text-8xl text-wedding-gold drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-9xl">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/55" />
+        <div className="relative z-10 flex flex-col items-center px-6 text-center">
+          <p className="mb-4 font-serif text-xs uppercase tracking-[0.5em] text-wedding-cream/80 drop-shadow sm:text-sm">
+            Sorrento · Amalfi Coast
+          </p>
+          <span className="font-title text-8xl leading-[0.95] text-wedding-gold drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-9xl md:text-[10rem]">
             Travel
           </span>
-          <span className="mt-6 animate-bounce text-4xl text-wedding-gold">▾</span>
         </div>
+        {/* Scroll cue anchored to the bottom edge of the hero */}
+        <span className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-2xl text-wedding-gold/80 drop-shadow">
+          ▼
+        </span>
       </section>
 
       {/* Striped cabana section with scalloped cards */}

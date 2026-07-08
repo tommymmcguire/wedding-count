@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost, Alex_Brush, Luxurious_Script } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const serif = Cormorant_Garamond({
@@ -17,18 +18,17 @@ const body = Jost({
   display: "swap",
 });
 
-// Formal calligraphy for the couple's names.
-const script = Alex_Brush({
-  subsets: ["latin"],
-  weight: "400",
+// The real ornate roundhand script from the original Canva design — extracted
+// from the published site's embedded webfont so titles + names match exactly.
+// Powers both --font-script (couple's names) and --font-title (section/page titles).
+const canvaScript = localFont({
+  src: "./fonts/canva-script.woff",
   variable: "--font-script",
   display: "swap",
 });
 
-// Ornate display script for section/page titles ("Save the Date", "F.A.Q.", "Travel").
-const title = Luxurious_Script({
-  subsets: ["latin"],
-  weight: "400",
+const canvaTitle = localFont({
+  src: "./fonts/canva-script.woff",
   variable: "--font-title",
   display: "swap",
 });
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${body.variable} ${script.variable} ${title.variable}`}
+      className={`${serif.variable} ${body.variable} ${canvaScript.variable} ${canvaTitle.variable}`}
     >
       <body className="min-h-screen bg-wedding-ink font-serif text-wedding-cream antialiased">
         {children}
