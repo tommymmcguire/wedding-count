@@ -39,11 +39,22 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    // A "player" card asks embed engines (Iframely/Canva) to render a live
+    // iframe of the app rather than a static card. Falls back to the image
+    // where player cards aren't supported (iMessage/WhatsApp use Open Graph).
+    card: "player",
     title: "Tentative Plans · Jacquelyn & Tommy",
     description:
       "Share your tentative plans for our wedding in Sorrento, Italy — June 2027.",
     images: ["/sorrento-desktop.jpg"],
+    players: [
+      {
+        playerUrl: "https://savethedate.jacquelynandtommy.com/",
+        streamUrl: "https://savethedate.jacquelynandtommy.com/",
+        width: 600,
+        height: 900,
+      },
+    ],
   },
   alternates: {
     // oEmbed discovery: lets Canva/Iframely (and Notion, etc.) find the endpoint
