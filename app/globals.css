@@ -9,5 +9,397 @@
 html,
 body {
   background-color: #faf7f2;
-  color: #2b2b2b;
+  color: #211f1c;
+}
+
+/* Elegant serif headings across the app, echoing the save-the-date */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+/* =====================================================
+   SAVE THE DATE — envelope intro
+   Palette: deep Tyrrhenian sea, ivory paper, olive gold,
+            terracotta wax, aged cream. Sorrento at dusk.
+   ===================================================== */
+
+.std-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  color: #ede0c4;
+  font-family: var(--font-display), "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  background: #aeccd2 url("/sorrento-desktop.jpg") center center / cover no-repeat;
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+
+.std-intro--dismissing {
+  opacity: 0;
+  transform: scale(1.015);
+  pointer-events: none;
+}
+
+/* portrait screens (phones/tablets) get the tall crop of the painting */
+@media (orientation: portrait) {
+  .std-intro {
+    background-image: url("/sorrento-mobile.jpg");
+  }
+}
+
+/* soft distant stars — hidden over the daytime painting */
+.std-stars {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 15%, rgba(237, 224, 196, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 82% 22%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(1.2px 1.2px at 24% 78%, rgba(237, 224, 196, 0.6), transparent 60%),
+    radial-gradient(0.8px 0.8px at 68% 82%, rgba(237, 224, 196, 0.4), transparent 60%),
+    radial-gradient(0.8px 0.8px at 45% 8%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 92% 60%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(0.8px 0.8px at 4% 55%, rgba(237, 224, 196, 0.4), transparent 60%),
+    radial-gradient(1.2px 1.2px at 34% 92%, rgba(237, 224, 196, 0.5), transparent 60%),
+    radial-gradient(0.8px 0.8px at 78% 8%, rgba(237, 224, 196, 0.4), transparent 60%);
+  animation: std-twinkle 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes std-twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+.std-vignette {
+  display: none;
+}
+
+/* monogram at top */
+.std-monogram {
+  position: absolute;
+  top: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: std-fade-in 1200ms ease 400ms forwards;
+  pointer-events: none;
+}
+.std-monogram img {
+  display: block;
+  width: auto;
+  height: 132px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+}
+
+@keyframes std-fade-in {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* corner flourishes — hand-drawn feel */
+.std-corner {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  color: #1a324b;
+  opacity: 0;
+  animation: std-fade-in-plain 1500ms ease 800ms forwards;
+  pointer-events: none;
+}
+.std-corner--tl { top: 32px; left: 32px; }
+.std-corner--tr { top: 32px; right: 32px; transform: scaleX(-1); }
+.std-corner svg { width: 100%; height: 100%; }
+
+@keyframes std-fade-in-plain {
+  from { opacity: 0; }
+  to { opacity: 0.6; }
+}
+
+/* -------- envelope scene -------- */
+
+.std-scene {
+  perspective: 1700px;
+  position: relative;
+  z-index: 1;
+}
+
+.std-envelope {
+  position: relative;
+  width: min(92vw, 700px);
+  aspect-ratio: 1.5 / 1;
+  transform-style: preserve-3d;
+  box-shadow: 0 14px 26px rgba(140, 105, 25, 0.18);
+  animation: std-envelope-in 1100ms cubic-bezier(0.34, 1.4, 0.64, 1) 300ms both;
+}
+
+@keyframes std-envelope-in {
+  from { opacity: 0; transform: translateY(46px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* paper interior, seen once the flap opens */
+.std-envelope__inside {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(0);
+  border-radius: 3px;
+  background: linear-gradient(180deg, #f0d885 0%, #d9b855 42%, #b58f30 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(120, 88, 28, 0.4),
+    inset 0 14px 34px rgba(95, 62, 14, 0.4);
+}
+
+/* the save-the-date card, tucked inside */
+.std-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 84%;
+  aspect-ratio: 1285 / 1800;
+  transform: translate(-50%, -50%) translateZ(1px) translateY(7%) scale(0.92);
+  transition: transform 1500ms cubic-bezier(0.34, 1.2, 0.5, 1) 350ms;
+}
+.std-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.32));
+}
+
+/* once opened, the card rises out and enlarges to be fully read */
+.std-envelope--revealed .std-card,
+.std-envelope--dismissing .std-card {
+  transform: translate(-50%, -50%) translateZ(1px) translateY(-4%) scale(1.9);
+}
+.std-envelope--revealed .std-card img,
+.std-envelope--dismissing .std-card img {
+  filter: drop-shadow(0 34px 56px rgba(0, 0, 0, 0.5));
+}
+
+/* once the card is out, the envelope itself recedes for a clean read */
+.std-envelope--revealed .std-flap,
+.std-envelope--revealed .std-envelope__inside,
+.std-envelope--dismissing .std-flap,
+.std-envelope--dismissing .std-envelope__inside {
+  opacity: 0;
+  transition: opacity 650ms ease 250ms;
+}
+
+/* the four flaps that tile the envelope face */
+.std-flap {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+}
+
+.std-flap--left {
+  clip-path: polygon(0 0, 0 100%, 50% 50%);
+  background: linear-gradient(90deg, #d9c9a5 0%, #c7b489 100%);
+  transform: translateZ(2px);
+}
+.std-flap--right {
+  clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+  background: linear-gradient(270deg, #d9c9a5 0%, #c7b489 100%);
+  transform: translateZ(2px);
+}
+.std-flap--bottom {
+  clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+  background: linear-gradient(0deg, #e6d8b6 0%, #d5c096 100%);
+  transform: translateZ(3px);
+  filter: drop-shadow(0 -2px 4px rgba(70, 45, 15, 0.20));
+}
+
+/* sealed top flap — tan outside; gold inner face snaps in at edge-on */
+.std-flap--top {
+  clip-path: polygon(0 0, 100% 0, 50% 56%);
+  background: linear-gradient(180deg, #f2ead4 0%, #e0d0a8 100%);
+  transform-origin: top center;
+  transform: translateZ(4px) rotateX(0deg);
+  transition: transform 1200ms cubic-bezier(0.65, 0, 0.35, 1);
+  filter: drop-shadow(0 7px 9px rgba(60, 40, 10, 0.28));
+}
+/* gold inner face — hidden until the flap passes edge-on, so the outside never shows gold */
+.std-flap--top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 56%);
+  background: linear-gradient(180deg, #f0d885 0%, #d9b855 42%, #b58f30 100%);
+  opacity: 0;
+  transition: opacity 0s linear 640ms;
+}
+
+.std-envelope--opening .std-flap--top,
+.std-envelope--revealed .std-flap--top,
+.std-envelope--dismissing .std-flap--top {
+  transform: translateZ(4px) rotateX(-172deg);
+}
+.std-envelope--opening .std-flap--top::after,
+.std-envelope--revealed .std-flap--top::after,
+.std-envelope--dismissing .std-flap--top::after {
+  opacity: 1;
+}
+
+/* wax seal — terracotta, over the flap tip */
+/* pre-rendered gold wax seal image */
+.std-wax {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 164px;
+  transform: translate(-50%, -52%) translateZ(5px);
+  transition: opacity 500ms ease, transform 700ms ease;
+}
+/* printed instruction along the bottom of the envelope */
+.std-caption {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 7.5%;
+  margin: 0;
+  text-align: center;
+  transform: translateZ(6px);
+  color: #241c14;
+  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+.std-envelope--opening .std-caption,
+.std-envelope--revealed .std-caption,
+.std-envelope--dismissing .std-caption {
+  opacity: 0;
+}
+
+.std-wax img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.std-envelope--opening .std-wax,
+.std-envelope--revealed .std-wax,
+.std-envelope--dismissing .std-wax {
+  opacity: 0;
+  transform: translate(-50%, -52%) translateZ(5px) scale(0.5) rotate(18deg);
+}
+
+/* continue button — appears once the invitation is open */
+.std-continue {
+  position: absolute;
+  bottom: 5.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  padding: 0.85rem 2.7rem;
+  border: 1px solid rgba(28, 58, 99, 0.35);
+  border-radius: 999px;
+  background: #fbf4e6;
+  color: #1c3a63;
+  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 3px 8px rgba(0, 0, 0, 0.3);
+  transition: background 300ms ease, color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+  animation: std-continue-in 700ms ease 250ms both;
+}
+.std-continue:hover {
+  background: #1c3a63;
+  color: #fbf4e6;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
+}
+@keyframes std-continue-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* hint text */
+.std-hint {
+  position: absolute;
+  bottom: 11vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fbf4e6;
+  font-family: var(--font-display), "Cormorant Garamond", ui-serif, Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.28em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 0 14px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+.std-hint::before,
+.std-hint::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: #fbf4e6;
+  vertical-align: middle;
+  margin: 0 1rem;
+  opacity: 0.85;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.std-hint--shown {
+  opacity: 1;
+  animation: std-hint-pulse 2.6s ease-in-out infinite;
+}
+.std-hint--hidden {
+  opacity: 0;
+}
+
+@keyframes std-hint-pulse {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+.std-hint--stage-revealed {
+  animation: std-hint-appear 900ms ease 1300ms both,
+             std-hint-pulse 2.6s ease-in-out 2.2s infinite;
+}
+@keyframes std-hint-appear {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (max-width: 480px) {
+  .std-monogram { top: 5vh; }
+  .std-monogram img { width: 68px; }
+  .std-corner { width: 70px; height: 70px; top: 20px !important; }
+  .std-corner--tl { left: 20px; }
+  .std-corner--tr { right: 20px; }
+  .std-hint { bottom: 7vh; font-size: 0.95rem; letter-spacing: 0.2em; }
+  .std-hint::before, .std-hint::after { width: 18px; margin: 0 0.6rem; }
+  .std-wax { width: 118px; }
+  .std-caption { font-size: 0.82rem; letter-spacing: 0.12em; bottom: 8%; }
+  .std-continue { font-size: 0.72rem; letter-spacing: 0.2em; padding: 0.72rem 2rem; bottom: 4.5vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .std-intro *,
+  .std-intro::before,
+  .std-intro::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }

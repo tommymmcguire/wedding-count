@@ -152,30 +152,38 @@ export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
     }
   }
 
-  if (loading) return <p className="text-sm text-neutral-500">Loading your household…</p>;
-  if (loadError) return <p className="text-sm text-red-600">{loadError}</p>;
+  if (loading)
+    return (
+      <p className="text-center text-sm font-light italic text-ink/50">
+        Loading your household…
+      </p>
+    );
+  if (loadError)
+    return (
+      <p className="text-center text-sm font-light text-terracotta">{loadError}</p>
+    );
   if (!detail) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-10">
       <button
         type="button"
         onClick={onBack}
-        className="text-sm text-neutral-500 underline underline-offset-4 hover:text-neutral-800"
+        className="text-[0.7rem] uppercase tracking-[0.2em] text-ink/45 transition hover:text-ink"
       >
         ← Search for a different name
       </button>
 
       {detail.members.length > 1 ? (
-        <section className="space-y-3">
-          <h2 className="text-lg font-semibold text-neutral-900">Who are these plans for?</h2>
-          <p className="text-sm text-neutral-600">
+        <section className="space-y-4">
+          <SectionHeading>Who are these plans for?</SectionHeading>
+          <p className="text-sm font-light text-ink/55">
             Uncheck anyone not included in this response.
           </p>
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {detail.members.map((member) => (
               <li key={member.guestId}>
-                <label className="flex items-center gap-3 rounded-md border border-neutral-200 bg-white px-4 py-3">
+                <label className="flex cursor-pointer items-center gap-3 rounded-md border border-line bg-card px-4 py-3.5 transition has-[:checked]:border-ink/60 has-[:checked]:bg-ink/[0.03] hover:border-ink/30">
                   <input
                     type="checkbox"
                     checked={!!form.attending[member.guestId]}
@@ -185,41 +193,41 @@ export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
                         attending: { ...f.attending, [member.guestId]: e.target.checked },
                       }))
                     }
-                    className="h-4 w-4"
+                    className="h-4 w-4 accent-ink"
                   />
-                  <span className="text-neutral-900">{member.guestName}</span>
+                  <span className="text-ink">{member.guestName}</span>
                 </label>
               </li>
             ))}
           </ul>
           {!anyAttending && (
-            <p className="text-sm text-amber-700">
+            <p className="text-sm font-light text-terracotta">
               Select at least one person to include in this response.
             </p>
           )}
         </section>
       ) : (
-        <p className="text-sm text-neutral-600">
-          Sharing plans for <span className="font-medium text-neutral-900">{detail.members[0].guestName}</span>.
+        <p className="text-sm font-light text-ink/65">
+          Sharing plans for <span className="font-normal text-ink">{detail.members[0].guestName}</span>.
         </p>
       )}
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold text-neutral-900">Your response</h2>
-        <ul className="space-y-2">
+      <section className="space-y-4">
+        <SectionHeading>Your response</SectionHeading>
+        <ul className="space-y-2.5">
           {RSVP_STATUSES.map((status) => (
             <li key={status}>
-              <label className="flex items-start gap-3 rounded-md border border-neutral-200 bg-white px-4 py-3">
+              <label className="flex cursor-pointer items-start gap-3 rounded-md border border-line bg-card px-4 py-3.5 transition has-[:checked]:border-ink/60 has-[:checked]:bg-ink/[0.03] hover:border-ink/30">
                 <input
                   type="radio"
                   name="status"
                   value={status}
                   checked={form.status === status}
                   onChange={() => setForm((f) => ({ ...f, status }))}
-                  className="mt-1 h-4 w-4"
+                  className="mt-1 h-4 w-4 accent-ink"
                   required
                 />
-                <span className="text-neutral-900">
+                <span className="text-ink">
                   {statusLabelFor(status, detail.members.length)}
                 </span>
               </label>
@@ -228,11 +236,11 @@ export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
         </ul>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold text-neutral-900">
+      <section className="space-y-4">
+        <SectionHeading>
           Mailing address {requiresAddress ? "" : "(optional)"}
-        </h2>
-        <p className="text-sm text-neutral-600">
+        </SectionHeading>
+        <p className="text-sm font-light text-ink/55">
           {requiresAddress
             ? "We'll use this to send you further wedding details."
             : "Feel free to skip if you'd rather not share right now."}
@@ -292,23 +300,25 @@ export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
         </div>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold text-neutral-900">Anything else? (optional)</h2>
+      <section className="space-y-4">
+        <SectionHeading>Anything else? (optional)</SectionHeading>
         <textarea
           value={form.note}
           onChange={(e) => setForm((f) => ({ ...f, note: e.target.value }))}
           rows={3}
           placeholder="Song request, dietary note, well-wishes…"
-          className="w-full rounded-md border border-neutral-300 bg-white px-4 py-3 text-base outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-200"
+          className="w-full rounded-md border border-line bg-card px-4 py-3 text-base text-ink outline-none transition placeholder:text-ink/30 focus:border-ink/40"
         />
       </section>
 
-      {submitError && <p className="text-sm text-red-600">{submitError}</p>}
+      {submitError && (
+        <p className="text-center text-sm font-light text-terracotta">{submitError}</p>
+      )}
 
       <button
         type="submit"
         disabled={submitting || !anyAttending || !form.status}
-        className="w-full rounded-md bg-neutral-900 px-4 py-3 text-base font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-400"
+        className="w-full rounded-md bg-ink px-4 py-3.5 text-xs font-medium uppercase tracking-[0.25em] text-paper transition hover:bg-ink/85 disabled:cursor-not-allowed disabled:bg-ink/25"
       >
         {submitting
           ? "Sending…"
@@ -317,6 +327,12 @@ export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
             : "Share tentative plans"}
       </button>
     </form>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-display text-2xl font-normal text-ink">{children}</h2>
   );
 }
 
@@ -337,7 +353,9 @@ function TextInput({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-neutral-700">{label}</span>
+      <span className="mb-1.5 block text-[0.7rem] uppercase tracking-[0.18em] text-ink/45">
+        {label}
+      </span>
       <input
         type="text"
         value={value}
@@ -345,7 +363,7 @@ function TextInput({
         required={required}
         name={name}
         autoComplete={autoComplete}
-        className="w-full rounded-md border border-neutral-300 bg-white px-4 py-2 text-base outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-200"
+        className="w-full rounded-md border border-line bg-card px-4 py-2.5 text-base text-ink outline-none transition placeholder:text-ink/30 focus:border-ink/40"
       />
     </label>
   );
