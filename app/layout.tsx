@@ -20,7 +20,7 @@ const body = Jost({
 export const metadata: Metadata = {
   // Set this to your live RSVP domain so preview/embed cards can resolve the
   // absolute image URL. Update if your subdomain differs.
-  metadataBase: new URL("https://rsvp.jacquelynandtommy.com"),
+  metadataBase: new URL("https://savethedate.jacquelynandtommy.com"),
   title: "Tentative Plans · Jacquelyn & Tommy",
   description:
     "Share your tentative plans for Jacquelyn & Tommy's wedding in Sorrento, Italy — June 2027.",
