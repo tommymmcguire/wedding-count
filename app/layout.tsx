@@ -18,8 +18,33 @@ const body = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Tentative Plans",
-  description: "Share your tentative plans for the wedding",
+  // Set this to your live RSVP domain so preview/embed cards can resolve the
+  // absolute image URL. Update if your subdomain differs.
+  metadataBase: new URL("https://rsvp.jacquelynandtommy.com"),
+  title: "Tentative Plans · Jacquelyn & Tommy",
+  description:
+    "Share your tentative plans for Jacquelyn & Tommy's wedding in Sorrento, Italy — June 2027.",
+  openGraph: {
+    type: "website",
+    title: "Tentative Plans · Jacquelyn & Tommy",
+    description:
+      "Share your tentative plans for our wedding in Sorrento, Italy — June 2027.",
+    images: [
+      {
+        url: "/sorrento-desktop.jpg",
+        width: 2560,
+        height: 1440,
+        alt: "Sorrento, Italy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tentative Plans · Jacquelyn & Tommy",
+    description:
+      "Share your tentative plans for our wedding in Sorrento, Italy — June 2027.",
+    images: ["/sorrento-desktop.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
