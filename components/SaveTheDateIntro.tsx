@@ -9,7 +9,13 @@ type Stage = "closed" | "opening" | "revealed" | "dismissing";
 function shouldSkipIntro() {
   if (typeof window === "undefined") return false;
   if (window.location.search.includes("replay=1")) return false;
-  return window.sessionStorage.getItem(SESSION_KEY) === "1";
+  // sessionStorage can throw when the app is loaded inside a cross-site iframe
+  // (e.g. embedded in the Canva site) with storage access blocked.
+  try {
+    return window.sessionStorage.getItem(SESSION_KEY) === "1";
+  } catch {
+    return false;
+  }
 }
 
 export function SaveTheDateIntro({ onDone }: { onDone: () => void }) {

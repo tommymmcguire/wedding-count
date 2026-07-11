@@ -45,6 +45,14 @@ export const metadata: Metadata = {
       "Share your tentative plans for our wedding in Sorrento, Italy — June 2027.",
     images: ["/sorrento-desktop.jpg"],
   },
+  alternates: {
+    // oEmbed discovery: lets Canva/Iframely (and Notion, etc.) find the endpoint
+    // that returns a live interactive iframe instead of a static preview card.
+    types: {
+      "application/json+oembed":
+        "/api/oembed?url=https%3A%2F%2Fsavethedate.jacquelynandtommy.com%2F&format=json",
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
