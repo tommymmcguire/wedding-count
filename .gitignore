@@ -8,3 +8,10 @@ out/
 .DS_Store
 next-env.d.ts
 .vercel
+
+# TypeScript incremental build cache (auto-generated)
+tsconfig.tsbuildinfo
+
+# Scraped Canva assets (heavy, not part of the app)
+canva-capture/
+public/canva/
