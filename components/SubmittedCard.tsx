@@ -1,10 +1,6 @@
 "use client";
 
-type Props = {
-  onEditAgain: () => void;
-};
-
-export function SubmittedCard({ onEditAgain }: Props) {
+export function SubmittedCard() {
   return (
     <div className="space-y-7 rounded-lg border border-line bg-card px-8 py-12 text-center">
       <p className="text-[0.7rem] uppercase tracking-[0.35em] text-gold">
@@ -23,14 +19,6 @@ export function SubmittedCard({ onEditAgain }: Props) {
         Your tentative plans are in. You can update them any time by re-opening this page.
         Your formal RSVP will come later.
       </p>
-
-      <button
-        type="button"
-        onClick={onEditAgain}
-        className="text-[0.7rem] uppercase tracking-[0.2em] text-ink/45 transition hover:text-ink"
-      >
-        Share plans for a different household
-      </button>
     </div>
   );
 }

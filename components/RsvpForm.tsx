@@ -12,7 +12,6 @@ import {
 type Props = {
   householdId: string;
   onSubmitted: () => void;
-  onBack: () => void;
 };
 
 type FormState = {
@@ -39,7 +38,7 @@ const EMPTY_FORM: FormState = {
   note: "",
 };
 
-export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
+export function RsvpForm({ householdId, onSubmitted }: Props) {
   const [detail, setDetail] = useState<HouseholdDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -166,14 +165,6 @@ export function RsvpForm({ householdId, onSubmitted, onBack }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-10">
-      <button
-        type="button"
-        onClick={onBack}
-        className="text-[0.7rem] uppercase tracking-[0.2em] text-ink/45 transition hover:text-ink"
-      >
-        ← Search for a different name
-      </button>
-
       {detail.members.length > 1 ? (
         <section className="space-y-4">
           <SectionHeading>Who are these plans for?</SectionHeading>
