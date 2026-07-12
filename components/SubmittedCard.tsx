@@ -19,6 +19,13 @@ export function SubmittedCard() {
         Your tentative plans are in. You can update them any time by re-opening this page.
         Your formal RSVP will come later.
       </p>
+
+      <a
+        href="https://jacquelynandtommy.com"
+        className="inline-flex items-center justify-center rounded-md border border-gold px-8 py-3 text-[0.7rem] uppercase tracking-[0.35em] text-gold transition-colors hover:bg-gold hover:text-card"
+      >
+        Back to website
+      </a>
     </div>
   );
 }
