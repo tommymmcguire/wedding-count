@@ -172,10 +172,19 @@ h3 {
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.32));
+  transition: filter 1600ms ease 250ms;
 }
 
-/* once opened, the card rises out and enlarges to be fully read */
-.std-envelope--revealed .std-card,
+/* Stacking here is DOM order — the flaps always paint over the card and no
+   translateZ changes that. So rather than fight it, the card simply holds its
+   place and scales up, and the whole envelope slides down + fades away to
+   reveal it. One easing, one duration, no z-changes → smooth, not jumpy.
+   The card's `from` matches its resting transform exactly, so there's no jump
+   when the animation takes over. */
+.std-envelope--revealed .std-card {
+  animation: std-card-out 1300ms cubic-bezier(0.22, 0.7, 0.3, 1) 120ms both;
+}
+/* hold the final pose once we start dismissing (no re-run of the animation) */
 .std-envelope--dismissing .std-card {
   transform: translate(-50%, -50%) translateZ(1px) translateY(-4%) scale(1.9);
 }
@@ -184,13 +193,53 @@ h3 {
   filter: drop-shadow(0 34px 56px rgba(0, 0, 0, 0.5));
 }
 
-/* once the card is out, the envelope itself recedes for a clean read */
-.std-envelope--revealed .std-flap,
+@keyframes std-card-out {
+  from {
+    transform: translate(-50%, -50%) translateZ(1px) translateY(7%) scale(0.92);
+  }
+  to {
+    transform: translate(-50%, -50%) translateZ(1px) translateY(-4%) scale(1.9);
+  }
+}
+
+/* The whole envelope — interior + all four flaps — slides straight down and
+   fades on IDENTICAL timing, so it leaves as one cohesive piece (no separation)
+   and dissolves quickly enough that it never smears across the card's face. */
 .std-envelope--revealed .std-envelope__inside,
-.std-envelope--dismissing .std-flap,
-.std-envelope--dismissing .std-envelope__inside {
+.std-envelope--dismissing .std-envelope__inside,
+.std-envelope--revealed .std-flap--left,
+.std-envelope--dismissing .std-flap--left,
+.std-envelope--revealed .std-flap--right,
+.std-envelope--dismissing .std-flap--right,
+.std-envelope--revealed .std-flap--bottom,
+.std-envelope--dismissing .std-flap--bottom,
+.std-envelope--revealed .std-flap--top,
+.std-envelope--dismissing .std-flap--top {
   opacity: 0;
-  transition: opacity 650ms ease 250ms;
+  transition: transform 1100ms cubic-bezier(0.4, 0, 0.3, 1) 100ms,
+              opacity 600ms ease 100ms;
+}
+.std-envelope--revealed .std-envelope__inside,
+.std-envelope--dismissing .std-envelope__inside {
+  transform: translateZ(0) translateY(74%);
+}
+.std-envelope--revealed .std-flap--left,
+.std-envelope--dismissing .std-flap--left {
+  transform: translateZ(2px) translateY(74%);
+}
+.std-envelope--revealed .std-flap--right,
+.std-envelope--dismissing .std-flap--right {
+  transform: translateZ(2px) translateY(74%);
+}
+.std-envelope--revealed .std-flap--bottom,
+.std-envelope--dismissing .std-flap--bottom {
+  transform: translateZ(3px) translateY(74%);
+}
+/* drop the envelope's residual drop-shadow along with the pocket */
+.std-envelope--revealed,
+.std-envelope--dismissing {
+  box-shadow: 0 0 0 rgba(140, 105, 25, 0);
+  transition: box-shadow 800ms ease 250ms;
 }
 
 /* the four flaps that tile the envelope face */
@@ -237,10 +286,15 @@ h3 {
   transition: opacity 0s linear 640ms;
 }
 
-.std-envelope--opening .std-flap--top,
+/* opening: the flap just swings up */
+.std-envelope--opening .std-flap--top {
+  transform: translateZ(4px) rotateX(-172deg);
+}
+/* revealed/dismissing: it stays open but slides down the same 74% as the
+   pocket, so the top and bottom of the envelope descend together */
 .std-envelope--revealed .std-flap--top,
 .std-envelope--dismissing .std-flap--top {
-  transform: translateZ(4px) rotateX(-172deg);
+  transform: translateY(74%) translateZ(4px) rotateX(-172deg);
 }
 .std-envelope--opening .std-flap--top::after,
 .std-envelope--revealed .std-flap--top::after,
