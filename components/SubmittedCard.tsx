@@ -22,9 +22,9 @@ export function SubmittedCard() {
 
       <a
         href="https://jacquelynandtommy.com"
-        className="inline-flex items-center justify-center rounded-md border border-gold px-8 py-3 text-[0.7rem] uppercase tracking-[0.35em] text-gold transition-colors hover:bg-gold hover:text-card"
+        className="inline-flex items-center justify-center rounded-md border border-gold bg-gold px-8 py-3 text-[0.7rem] uppercase tracking-[0.35em] text-card transition-colors hover:bg-white hover:text-gold"
       >
-        Back to website
+        Wedding Website
       </a>
     </div>
   );

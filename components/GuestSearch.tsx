@@ -42,7 +42,7 @@ export function GuestSearch({ onSelect }: Props) {
     <form onSubmit={handleSubmit} className="space-y-5">
       <label className="block">
         <span className="mb-2 block text-center text-[0.7rem] uppercase tracking-[0.25em] text-ink/50">
-          Type your full name as it appears on your invitation
+          Please type your full name
         </span>
         <input
           type="text"
